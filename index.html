@@ -1,62 +1,63 @@
-<html>
-    <head>
-        <title>FEEDBACK</title>
-            <link rel="stylesheet" href="back.css">
-                <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">"
-      </head>              
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FEEDBACK</title>
+    <link rel="stylesheet" href="back.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
 
-        <section></section>
-        <div class = "feed">
-            <form method="post" action="https://script.google.com/macros/s/AKfycbzQz5qbWR4tMO8U2eQxhc1I6J0suHs8QBDxtefo4gJXhOf1ajwv248U__EiEpmeHo7K/exec" name="contact-form">
-                <h1>Drop Us A Feedback</h1>
-                
-                <div class="stars">
-                    <p>How was your experience?</p>
-                     
-                    <i class="star far fa-star" id="star1" name="star" onclick="toggleStar(1);"></i>
-                    <i class="star far fa-star" id="star2" name="star" onclick="toggleStar(2);"></i>
-                    <i class="star far fa-star" id="star3" name="star" onclick="toggleStar(3);"></i>
-                    <i class="star far fa-star" id="star4" name="star" onclick="toggleStar(4);"></i>
-                    <i class="star far fa-star" id="star5" name="star" onclick="toggleStar(5);"></i>
-                
-                <div class = "id">
-                    <input type="text" name="Name" placeholder="Full Name">
-                    <i class="far fa-user"></i>
-                </div>
-        <div class="id">
-            <input type="text" name="EmailAddress" placeholder="Email address">
-            <i class="fas fa-at"></i>
-        </div>
-            <input type="text" name="Student Number" placeholder="Student Number">
-        </div>
-        <div class="col-75" style="text-align: justify;">
-            <label for="Campus">Campus</label>
-          <select name="campus" id="campus" style="width: 99%">
-            <option value=""></option>
-            <option value="Antipolo">Antipolo</option>
-            <option value="Main Campus">Main Campus</option>
-            <option value="Sumulong">Sumulong</option>
-            <option value="Binangonan">Binangonan</option>
-            <option value="Taytay">Taytay</option>
-            <option value="San Mateo">San Mateo</option>
-            <option value="Cogeo">Cogeo</option>
-          </select>
-        </div>
-      
-        
-        <textarea cols="15" rows="5" name="FEEDBACK" placeholder="Enter your experience here..."></textarea>
+    <div class="feed">
+        <form id="feedbackForm">
+            <h1>Drop Us A Feedback</h1>
+            
+            <div class="stars">
+                <p>How was your experience?</p>
+                <i class="star far fa-star" onclick="toggleStar(1);" id="star1"></i>
+                <i class="star far fa-star" onclick="toggleStar(2);" id="star2"></i>
+                <i class="star far fa-star" onclick="toggleStar(3);" id="star3"></i>
+                <i class="star far fa-star" onclick="toggleStar(4);" id="star4"></i>
+                <i class="star far fa-star" onclick="toggleStar(5);" id="star5"></i>
+            </div>
 
-        <input type="submit" value="Submit" id="Submit">
-         
-            </form>
-         </div>
-        </div>
+            <div class="id">
+                <input type="text" name="Name" placeholder="Full Name" required>
+                <i class="far fa-user"></i>
+            </div>
 
-         <script src="sheet.js"></script>
-        
-    </script>
-    </body>
+            <div class="id">
+                <input type="email" name="EmailAddress" placeholder="Email Address" required>
+                <i class="fas fa-at"></i>
+            </div>
+
+            <div class="id">
+                <input type="text" name="StudentNumber" placeholder="Student Number" required>
+            </div>
+
+            <div class="col-75" style="text-align: justify;">
+                <label for="Campus">Campus</label>
+                <select name="Campus" id="campus" style="width: 99%" required>
+                    <option value=""></option>
+                    <option value="Antipolo">Antipolo</option>
+                    <option value="Main Campus">Main Campus</option>
+                    <option value="Sumulong">Sumulong</option>
+                    <option value="Binangonan">Binangonan</option>
+                    <option value="Taytay">Taytay</option>
+                    <option value="San Mateo">San Mateo</option>
+                    <option value="Cogeo">Cogeo</option>
+                </select>
+            </div>
+
+            <textarea cols="15" rows="5" name="Feedback" placeholder="Enter your experience here..." required></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <p id="responseMessage"></p>
+    </div>
+
+    <script src="sheet.js"></script>
+</body>
 </html>
