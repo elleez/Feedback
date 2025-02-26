@@ -1,5 +1,24 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxyM19hkL_uiVrDTsyUCUpkaKxyu-9IJ2Uyak5O4WWw5kqN1KT3FD1UssAKPGn21NA/exec';
 
+document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+    event.preventDefault();  // Prevent default form submission
+
+    let formData = new FormData(this);
+    
+    fetch("https://script.google.com/macros/s/AKfycbzQz5qbWR4tMO8U2eQxhc1I6J0suHs8QBDxtefo4gJXhOf1ajwv248U__EiEpmeHo7K/exec", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("responseMessage").textContent = "Feedback submitted successfully!";
+        document.getElementById("feedbackForm").reset();
+    })
+    .catch(error => {
+        document.getElementById("responseMessage").textContent = "Error submitting feedback.";
+        console.error("Error:", error);
+    });
+});
 
 const form = document.forms['contact-form'];
 form.addEventListener('submit', e => {
