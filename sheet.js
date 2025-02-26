@@ -1,48 +1,54 @@
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxyM19hkL_uiVrDTsyUCUpkaKxyu-9IJ2Uyak5O4WWw5kqN1KT3FD1UssAKPGn21NA/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzQz5qbWR4tMO8U2eQxhc1I6J0suHs8QBDxtefo4gJXhOf1ajwv248U__EiEpmeHo7K/exec';
+const form = document.getElementById("feedbackForm");
+const responseMessage = document.getElementById("responseMessage");
+let currentRating = 0;
 
-document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-    event.preventDefault();  // Prevent default form submission
+// Listen for form submission
+form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission behavior
 
-    let formData = new FormData(this);
-    
-    fetch("https://script.google.com/macros/s/AKfycbzQz5qbWR4tMO8U2eQxhc1I6J0suHs8QBDxtefo4gJXhOf1ajwv248U__EiEpmeHo7K/exec", {
+    // Add the selected rating to the form data
+    const formData = new FormData(form);
+    formData.append("StarRating", currentRating); // Append star rating
+
+    fetch(scriptURL, {
         method: "POST",
         body: formData
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById("responseMessage").textContent = "Feedback submitted successfully!";
-        document.getElementById("feedbackForm").reset();
+        responseMessage.textContent = "Feedback submitted successfully!";
+        form.reset(); // Clear form after submission
+        resetStars(); // Reset star rating UI
     })
     .catch(error => {
-        document.getElementById("responseMessage").textContent = "Error submitting feedback.";
+        responseMessage.textContent = "Error submitting feedback.";
         console.error("Error:", error);
     });
 });
 
-const form = document.forms['contact-form'];
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => {
-            alert("Thank you! Your Feedback is submitted successfully");
-            window.location.reload();
-        })
-        .catch(error => console.error('Error!', error.message));
-});
-let currentRating = 0;
-
+// Function to handle star rating selection
 function toggleStar(starNumber) {
-    // Loop through all the stars
+    currentRating = starNumber; // Store the selected rating
+
     for (let i = 1; i <= 5; i++) {
         const star = document.getElementById(`star${i}`);
-        // If the star is before or equal to the clicked star, make it solid
         if (i <= starNumber) {
             star.classList.remove("far");
             star.classList.add("fas");
-        } else { // Otherwise, make it regular
+        } else {
             star.classList.remove("fas");
             star.classList.add("far");
         }
+    }
+}
+
+// Function to reset star rating UI after submission
+function resetStars() {
+    currentRating = 0;
+    for (let i = 1; i <= 5; i++) {
+        const star = document.getElementById(`star${i}`);
+        star.classList.remove("fas");
+        star.classList.add("far");
     }
 }
